@@ -11,9 +11,28 @@ module.exports = Marionette.CompositeView.extend({
   childView: ListItemView,
   childViewContainer: 'tbody',
   template: template,
+  templateHelpers: function () {
+    return {
+      filterValue: this.filterValue
+    }
+  },
 
   events: {
-    'click #refresh': 'refresh'
+    'click #refresh': 'refresh',
+    'keyup #filterMods': 'updateFilter'
+  },
+
+  initialize: function () {
+    this.filterValue = ''
+  },
+
+  filter: function (child, index, collection) {
+    return child.get('name').toLowerCase().indexOf(this.filterValue.toLowerCase()) >= 0
+  },
+
+  updateFilter: function (event) {
+    this.filterValue = event.target.value
+    this.render()
   },
 
   refresh: function (event) {
