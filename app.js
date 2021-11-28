@@ -12,7 +12,7 @@ var webpackConfig = require('./webpack.config')
 var setupBasicAuth = require('./lib/setup-basic-auth')
 var Manager = require('./lib/manager')
 var Missions = require('./lib/missions')
-var SteamMods = require('./lib/steam_mods')
+var Mods = require('./lib/mods')
 var Logs = require('./lib/logs')
 var Settings = require('./lib/settings')
 
@@ -33,7 +33,7 @@ app.use(serveStatic(path.join(__dirname, 'public')))
 var logs = new Logs(config)
 
 var missions = new Missions(config)
-var mods = new SteamMods(config)
+var mods = new Mods(config)
 mods.updateMods()
 
 var settings = new Settings(config)
