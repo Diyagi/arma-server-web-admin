@@ -50,6 +50,7 @@ module.exports = Marionette.ItemView.extend({
   templateHelpers: function () {
     var modFile = this.model.get('modFile')
     var steamMeta = this.model.get('steamMeta')
+	var modId = this.model.get('id')
 
     var link = null
     var title = null
@@ -57,12 +58,16 @@ module.exports = Marionette.ItemView.extend({
     if (steamMeta && steamMeta.id) {
       if (steamMeta.id) {
         link = 'https://steamcommunity.com/sharedfiles/filedetails/?id=' + steamMeta.id
-      }
+      } else {
+		link = 'https://steamcommunity.com/sharedfiles/filedetails/?id=' + modId
+	  }
 
       if (steamMeta.name) {
         title = steamMeta.name
       }
-    }
+    } else {
+		link = 'https://steamcommunity.com/sharedfiles/filedetails/?id=' + modId
+	}
 
     if (modFile && modFile.name) {
       title = modFile.name
